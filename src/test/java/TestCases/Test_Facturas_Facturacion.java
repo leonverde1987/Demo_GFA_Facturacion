@@ -55,7 +55,7 @@ public class Test_Facturas_Facturacion extends steps_Facturas_Facturacion{
     @SpiraTestCase(testCaseId=9163)
     public void Test_Facturar_Token_No_Valido() throws InterruptedException, DocumentException, BadElementException, IOException, Exception {
         try{
-            Escenario = "FAC_Factuarar_Facturar_Boletos.";
+            Escenario = "FAC_Facturar_Facturar_Boletos.";
             Navegador = this.navegador(driver.toString());
             
             //Paso 1
@@ -90,11 +90,11 @@ public class Test_Facturas_Facturacion extends steps_Facturas_Facturacion{
         }catch(NoSuchElementException s){
             Resultado = "Ejecución Fallida, No se encontró elemento: "+s;
             this.capturarEvidencia(driver, Config, contador, Escenario, Navegador);
-            System.out.println(Resultado);
+            throw new Exception(Resultado);
         }catch(InterruptedException e){
             Resultado = "Ejecución Fallida: "+e;
             this.capturarEvidencia(driver, Config, contador, Escenario, Navegador);
-            System.out.println(Resultado);
+            throw new Exception(Resultado);
         }finally{
             this.finalizarTestCase(driver, Escenario, Resultado, contador, Pasos, RutaEvidencia, Config.getProperty("Modulo"), Config.getProperty("Version"), Navegador);
         }

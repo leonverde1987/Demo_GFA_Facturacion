@@ -161,11 +161,9 @@ public class genericGrid extends evidenceGrid {
             //Generamos HTML
             this.crearHTML(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
 
-            if("Fallido".equals(Resultado.substring(0, 7))){
-                throw new Exception(Resultado);
-            }
+            
         }catch(Exception e){
-            System.out.println("MEnsaje Evidencia: "+e);
+            System.out.println("Mensaje Evidencia: "+e);
         }
     }
     /*
