@@ -46,7 +46,7 @@ public class Test_Facturas_Facturacion extends steps_Facturas_Facturacion{
         contador = 1;
         RutaEvidencia = Config.getProperty("rutaEvidencia");
         Resultado = "Fallido";
-        Navegador = Config.getProperty("NavegadorFac");
+        Navegador = Config.getProperty("Navegador");
         driver = this.openGridBrowser(Navegador, Config);
         
     }
