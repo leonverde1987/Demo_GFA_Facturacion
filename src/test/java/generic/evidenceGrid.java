@@ -407,7 +407,7 @@ public class evidenceGrid {
                 
                 
                 printw.println(".exitosoAccordion:after {");
-                  printw.println("content: '\002B';");
+                  //printw.println("content: '\002B';");
                   printw.println("color: #46a049;");
                   printw.println("font-weight: bold;");
                   printw.println("float: right;");
@@ -415,7 +415,7 @@ public class evidenceGrid {
                 printw.println("}");
                 
                 printw.println(".fallaAccordion:after {");
-                  printw.println("content: '\002B';");
+                  //printw.println("content: '\002B';");
                   printw.println("color: #da190b;");
                   printw.println("font-weight: bold;");
                   printw.println("float: right;");
@@ -423,7 +423,7 @@ public class evidenceGrid {
                 printw.println("}");
                 
                 printw.println(".ejecucionAccordion:after {");
-                  printw.println("content: '\002B';");
+                  //printw.println("content: '\002B';");
                   printw.println("color: #e68a00;");
                   printw.println("font-weight: bold;");
                   printw.println("float: right;");
@@ -431,15 +431,15 @@ public class evidenceGrid {
                 printw.println("}");
 
                 printw.println(".active:after {");
-                  printw.println("content: \"\2212\";");
+                  //printw.println("content: \"\2212\";");
                 printw.println("}");
                 
                 printw.println(".activeEjecucion:after {");
-                  printw.println("content: \"\2212\";");
+                  //printw.println("content: \"\2212\";");
                 printw.println("}");
                 
                 printw.println(".activeFalla:after {");
-                  printw.println("content: \"\2212\";");
+                  //printw.println("content: \"\2212\";");
                 printw.println("}");
 
                 printw.println(".panel {");
