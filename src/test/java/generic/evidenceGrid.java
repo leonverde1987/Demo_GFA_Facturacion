@@ -354,8 +354,8 @@ public class evidenceGrid {
             
             printw.println("<style>");
                 printw.println(".exitosoAccordion {");
-                  printw.println("background-color: #4CAF50;");
-                  printw.println("color: #FFF;");
+                  printw.println("background-color: #eee;");
+                  printw.println("color: #444;");
                   printw.println("cursor: pointer;");
                   printw.println("padding: 18px;");
                   printw.println("width: 100%;");
@@ -393,7 +393,7 @@ public class evidenceGrid {
                 printw.println("}");
 
                 printw.println(".active, .exitosoAccordion:hover {");
-                  printw.println("background-color: #46a049;");
+                  printw.println("background-color: #ccc;");
                 printw.println("}");
                 
                 printw.println(".activeEjecucion, .ejecucionAccordion:hover {");
@@ -408,7 +408,7 @@ public class evidenceGrid {
                 
                 printw.println(".exitosoAccordion:after {");
                   //printw.println("content: '\002B';");
-                  printw.println("color: #46a049;");
+                  printw.println("color: #777;");
                   printw.println("font-weight: bold;");
                   printw.println("float: right;");
                   printw.println("margin-left: 5px;");
