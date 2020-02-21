@@ -353,8 +353,8 @@ public class evidenceGrid {
             printw.println("<head><title>Reporte de Evidencia</title>");
             
             printw.println("<style>");
-                printw.println(".accordion {");
-                  printw.println("background-color: #04B431;");
+                printw.println(".exitosoAccordion {");
+                  printw.println("background-color: #4CAF50;");
                   printw.println("color: #FFF;");
                   printw.println("cursor: pointer;");
                   printw.println("padding: 18px;");
@@ -392,45 +392,53 @@ public class evidenceGrid {
                   printw.println("transition: 0.4s;");
                 printw.println("}");
 
-                printw.println(".active, .accordion:hover {");
-                  printw.println("background-color: #ccc;");
+                printw.println(".active, .exitosoAccordion:hover {");
+                  printw.println("background-color: #46a049;");
                 printw.println("}");
                 
-//                printw.println(".active, .ejecucionAccordion:hover {");
-//                  printw.println("background-color: #ff9800;");
-//                printw.println("}");
-//                
-//                printw.println(".active, .fallaAccordion:hover {");
-//                  printw.println("background-color: #f44336;");
-//                printw.println("}");
+                printw.println(".activeEjecucion, .ejecucionAccordion:hover {");
+                  printw.println("background-color: #e68a00;");
+                printw.println("}");
+                
+                printw.println(".activeFalla, .fallaAccordion:hover {");
+                  printw.println("background-color: #da190b;");
+                printw.println("}");
 
                 
                 
-                printw.println(".accordion:after {");
+                printw.println(".exitosoAccordion:after {");
                   printw.println("content: '\002B';");
-                  printw.println("color: #777;");
+                  printw.println("color: #46a049;");
                   printw.println("font-weight: bold;");
                   printw.println("float: right;");
                   printw.println("margin-left: 5px;");
                 printw.println("}");
                 
-//                printw.println(".fallaAccordion:after {");
-//                  printw.println("content: '\002B';");
-//                  printw.println("color: #777;");
-//                  printw.println("font-weight: bold;");
-//                  printw.println("float: right;");
-//                  printw.println("margin-left: 5px;");
-//                printw.println("}");
-//                
-//                printw.println(".ejecucionAccordion:after {");
-//                  printw.println("content: '\002B';");
-//                  printw.println("color: #777;");
-//                  printw.println("font-weight: bold;");
-//                  printw.println("float: right;");
-//                  printw.println("margin-left: 5px;");
-//                printw.println("}");
+                printw.println(".fallaAccordion:after {");
+                  printw.println("content: '\002B';");
+                  printw.println("color: #da190b;");
+                  printw.println("font-weight: bold;");
+                  printw.println("float: right;");
+                  printw.println("margin-left: 5px;");
+                printw.println("}");
+                
+                printw.println(".ejecucionAccordion:after {");
+                  printw.println("content: '\002B';");
+                  printw.println("color: #e68a00;");
+                  printw.println("font-weight: bold;");
+                  printw.println("float: right;");
+                  printw.println("margin-left: 5px;");
+                printw.println("}");
 
                 printw.println(".active:after {");
+                  printw.println("content: \"\2212\";");
+                printw.println("}");
+                
+                printw.println(".activeEjecucion:after {");
+                  printw.println("content: \"\2212\";");
+                printw.println("}");
+                
+                printw.println(".activeFalla:after {");
                   printw.println("content: \"\2212\";");
                 printw.println("}");
 
@@ -577,12 +585,13 @@ public class evidenceGrid {
                 printw.println("</table>");
             }
             printw.println("<h2 class=\"titulo\">Pasos de Ejecución: </h2>");
+            printw.println("<h4 class=\"titulo\">Presiona sobre el paso de ejecución para ver la evidencia.</h4>");
             for(int cont=0; cont<contador; cont++){
                 if((cont+1)<contador){
                     try{
-                        printw.println("<button class=\"accordion\">"+Pasos.get(cont)+"</button>");
+                        printw.println("<button class=\"exitosoAccordion\">"+Pasos.get(cont)+"</button>");
                     }catch(Exception e){
-                        printw.println("<button class=\"accordion\">Sin Paso</button>");
+                        printw.println("<button class=\"exitosoAccordion\">Sin Paso</button>");
                     }
                     printw.println("<div class=\"panel\">");
                     try{
@@ -607,9 +616,9 @@ public class evidenceGrid {
                     }
                     if("Exitoso".equals(Resultado.substring(0, 7))){
                         try{
-                            printw.println("<button class=\"accordion\">"+Pasos.get(cont)+"</button>");
+                            printw.println("<button class=\"exitosoAccordion\">"+Pasos.get(cont)+"</button>");
                         }catch(Exception e){
-                            printw.println("<button class=\"accordion\">Sin Paso</button>");
+                            printw.println("<button class=\"exitosoAccordion\">Sin Paso</button>");
                         }
                         printw.println("<div class=\"panel\">");
                         try{
@@ -640,7 +649,7 @@ public class evidenceGrid {
             printw.println("</div>");
             
             printw.println("<script>");
-            printw.println("var acc = document.getElementsByClassName(\"accordion\");");
+            printw.println("var acc = document.getElementsByClassName(\"exitosoAccordion\");");
             printw.println("var i;");
 
             printw.println("for (i = 0; i < acc.length; i++) {");
@@ -662,7 +671,7 @@ public class evidenceGrid {
 
             printw.println("for (i = 0; i < acc.length; i++) {");
               printw.println("acc[i].addEventListener(\"click\", function() {");
-                printw.println("this.classList.toggle(\"active\");");
+                printw.println("this.classList.toggle(\"activeEjecucion\");");
                 printw.println("var panel = this.nextElementSibling;");
                 printw.println("if (panel.style.maxHeight) {");
                   printw.println("panel.style.maxHeight = null;");
@@ -679,7 +688,7 @@ public class evidenceGrid {
 
             printw.println("for (i = 0; i < acc.length; i++) {");
               printw.println("acc[i].addEventListener(\"click\", function() {");
-                printw.println("this.classList.toggle(\"active\");");
+                printw.println("this.classList.toggle(\"activeFalla\");");
                 printw.println("var panel = this.nextElementSibling;");
                 printw.println("if (panel.style.maxHeight) {");
                   printw.println("panel.style.maxHeight = null;");
