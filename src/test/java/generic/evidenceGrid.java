@@ -180,7 +180,7 @@ public class evidenceGrid {
         
         Table DatosEjec = new Table(3);
         
-        Paragraph parrafo1 = new Paragraph("Módulo EAM", fuenteBlanco); 
+        Paragraph parrafo1 = new Paragraph(modulo+" "+version, fuenteBlanco); 
         parrafo1.add(Chunk.NEWLINE);
         parrafo1.add(Chunk.NEWLINE);
         Cell celda1 = new Cell();
@@ -191,7 +191,7 @@ public class evidenceGrid {
         celda1.setVerticalAlignment(Element.ALIGN_MIDDLE);
         DatosEjec.addCell(celda1);
         
-        Paragraph parrafo2 = new Paragraph("v 1.8.1", fuenteBlanco);
+        Paragraph parrafo2 = new Paragraph(navegador, fuenteBlanco);
         parrafo2.add(Chunk.NEWLINE);
         parrafo2.add(Chunk.NEWLINE);
         Cell celda2 = new Cell();
@@ -306,9 +306,14 @@ public class evidenceGrid {
               moduloTC.setTextContent("Mantenimiento EAM");
               casoPrueba.appendChild(moduloTC);
               
+              org.w3c.dom.Element nav = doc.createElement("Navegador");
+              nav.setTextContent(navegador);
+              casoPrueba.appendChild(nav);
+              
               org.w3c.dom.Element fechaTC = doc.createElement("Fecha");
               fechaTC.setTextContent(this.fechaFormato());
               casoPrueba.appendChild(fechaTC);
+              
               
               org.w3c.dom.Element resultadoTC = doc.createElement("Resultado");
               resultadoTC.setTextContent(Resultado);
@@ -524,6 +529,14 @@ public class evidenceGrid {
                 printw.println("</td>");
                 printw.println("<td>");
                 printw.println("<h3 class=\"titulo\">"+modulo+version+"</h3>");
+                printw.println("</td>");
+                printw.println("</tr>");
+                printw.println("<tr>");
+                printw.println("<td>");
+                printw.println("<h3 class=\"titulo\">Navegador: </h3>");
+                printw.println("</td>");
+                printw.println("<td>");
+                printw.println("<h3 class=\"titulo\">"+navegador+"</h3>");
                 printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
