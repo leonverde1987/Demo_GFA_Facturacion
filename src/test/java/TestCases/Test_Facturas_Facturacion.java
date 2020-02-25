@@ -90,13 +90,14 @@ public class Test_Facturas_Facturacion extends steps_Facturas_Facturacion{
         }catch(NoSuchElementException s){
             Resultado = "Ejecución Fallida, No se encontró elemento: "+s;
             this.capturarEvidencia(driver, Config, contador, Escenario, Navegador);
-            throw new Exception(Resultado);
         }catch(InterruptedException e){
             Resultado = "Ejecución Fallida: "+e;
             this.capturarEvidencia(driver, Config, contador, Escenario, Navegador);
-            throw new Exception(Resultado);
         }finally{
             this.finalizarTestCase(driver, Escenario, Resultado, contador, Pasos, RutaEvidencia, Config.getProperty("Modulo"), Config.getProperty("Version"), Navegador);
+            if(!"Exitoso".equals(Resultado.substring(0, 7))){
+                throw new Exception("Navegador: "+Navegador + "\n Resultado: " + Resultado);
+            }
         }
     }
     
