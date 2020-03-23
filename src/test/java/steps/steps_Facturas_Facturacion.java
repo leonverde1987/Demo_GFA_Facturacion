@@ -146,11 +146,11 @@ public class steps_Facturas_Facturacion extends genericGrid{
      */
     public void capturarEvidencia(RemoteWebDriver driver, Properties Config, int error, String Escenario, String navegador) throws InterruptedException{
         
-        switch(error) {
-            case 1:
-                this.capturaDriver(driver, Config.getProperty("rutaEvidencia"), error, Escenario, navegador);
-                break;
-        }
+//        switch(error) {
+//            case 1:
+          this.capturaDriver(driver, Config.getProperty("rutaEvidencia"), error, Escenario, navegador);
+//                break;
+//        }
     }
     
     /**

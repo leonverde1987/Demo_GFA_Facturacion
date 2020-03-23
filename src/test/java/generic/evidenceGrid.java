@@ -22,6 +22,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -117,7 +118,7 @@ public class evidenceGrid {
         // Se crea el documento
         Document documento = new Document(PageSize.A4);
         // Se crea el OutputStream para el fichero donde queremos dejar el pdf.
-        FileOutputStream ficheroPdf = new FileOutputStream(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\"+CasoPrueba+"-"+this.horaMinSeg()+".pdf");
+        FileOutputStream ficheroPdf = new FileOutputStream(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\"+CasoPrueba+".pdf");
         // Se asocia el documento al OutputStream y se indica que el espaciado entre
         // lineas sera de 20. Esta llamada debe hacerse antes de abrir el documento
         PdfWriter.getInstance(documento,ficheroPdf).setInitialLeading(20);
@@ -349,9 +350,9 @@ public class evidenceGrid {
     public void crearHTML(String CasoPrueba, String Resultado, int contador, List<String> Pasos, String rutaEvidencia, String modulo, String version, String navegador) throws IOException{
         FileWriter filewriter = null;
         PrintWriter printw = null;
-
+        String urlAbsoluta = rutaEvidencia+"//"+this.fechaFormato()+"//"+navegador+"//"+CasoPrueba.substring(0, 3)+"//"+this.totalArchivos(new File(rutaEvidencia+"//"+fechaFormato()+"//"+navegador+"//"+CasoPrueba.substring(0, 3)))+"//"+CasoPrueba+"//"+CasoPrueba;
         try{
-            filewriter = new FileWriter(rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\"+CasoPrueba+"-"+this.horaMinSeg()+".html");//declarar el archivo
+            filewriter = new FileWriter(rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\"+CasoPrueba+".html");//declarar el archivo
             printw = new PrintWriter(filewriter);//declarar un impresor
 
             printw.println("<html>");
@@ -367,7 +368,7 @@ public class evidenceGrid {
                   printw.println("border: none;");
                   printw.println("-align: left;");
                   printw.println("outline: none;");
-                  printw.println("font-size: 15px;");
+                  printw.println("font-size: 12px;");
                   printw.println("transition: 0.4s;");
                 printw.println("}");
                 
@@ -380,7 +381,7 @@ public class evidenceGrid {
                   printw.println("border: none;");
                   printw.println("-align: left;");
                   printw.println("outline: none;");
-                  printw.println("font-size: 15px;");
+                  printw.println("font-size: 12px;");
                   printw.println("transition: 0.4s;");
                 printw.println("}");
                 
@@ -393,7 +394,7 @@ public class evidenceGrid {
                   printw.println("border: none;");
                   printw.println("-align: left;");
                   printw.println("outline: none;");
-                  printw.println("font-size: 15px;");
+                  printw.println("font-size: 12px;");
                   printw.println("transition: 0.4s;");
                 printw.println("}");
 
@@ -458,8 +459,9 @@ public class evidenceGrid {
                 printw.println(".btn {");
                   printw.println("border: none; /* Remove borders */");
                   printw.println("color: white; /* Add a text color */");
-                  printw.println("padding: 14px 28px; /* Add some padding */");
+                  printw.println("padding: 7px 14px; /* Add some padding */");
                   printw.println("cursor: pointer; /* Add a pointer cursor on mouse-over */");
+                  
                 printw.println("}");
 
                 printw.println(".success {background-color: #4CAF50;} /* Green */");
@@ -474,12 +476,14 @@ public class evidenceGrid {
                 printw.println(".danger {background-color: #f44336;} /* Red */");
                 printw.println(".danger:hover {background: #da190b;}");
                 
-                printw.println("#tablatitulo { width: 700px; margin: 0 auto; -align: center;}");
+                printw.println("#tablatitulo { width: 50%; margin: 0 auto; -align: center;}");
                 
-                printw.println("#contenido { width: 1200px; margin: 0 auto; }");
-                printw.println("#encabezado { width: 1200px; margin: 0 auto; background-color: #2196F3; color: #FF0000;}");
+                printw.println("#contenido { width: 100%; margin: 0 auto;font-size:12px;font-family: Georgia, 'Times New Roman', serif;}");
+                printw.println("#encabezado { width: 100%; margin: 0 auto; background-color: #58ACFA; color: #FF0000;}");//#2196F3;#819FF7
                 
-                printw.println("#titulo {color: white;}");
+                printw.println("#titulo {color: white;margin: 0;}");
+                
+                printw.println("a {font-size:10px;font-family: Georgia, 'Times New Roman', serif;}");
                 
                 printw.println("</style>");
                     
@@ -495,12 +499,12 @@ public class evidenceGrid {
             printw.println("<table id=\"encabezado\">");
             printw.println("<tr>");
             printw.println("<td>");
-            printw.println("<img src=\""+rutaEvidencia+"\\gfa.png\" width=\"215\" height=\"60\">");
+            printw.println("<img src=\""+rutaEvidencia+"\\gfa.png\" width=\"115\" height=\"30\">");
             printw.println("</td>");
             printw.println("<td>");
             printw.println("</td>");
             printw.println("<td>");
-            printw.println("<p align=\"right\"><img src=\""+rutaEvidencia+"\\testingit.png\" width=\"215\" height=\"60\"></p>");
+            printw.println("<p align=\"right\"><img src=\""+rutaEvidencia+"\\testingit.png\" width=\"115\" height=\"30\"></p>");
             printw.println("</td>");
             printw.println("</tr>");
             
@@ -512,45 +516,45 @@ public class evidenceGrid {
                 printw.println("<center><table id=\"tablatitulo\">");
                 printw.println("<tr>");
                 printw.println("<td colspan=\"2\">");
-                printw.println("<h1 class=\"titulo\">Reporte de Evidencia Pruebas Automatizadas</h1>");
+                printw.println("<h2 class=\"titulo\">Reporte de Evidencia Pruebas Automatizadas</h2>");
                 printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">Fecha de Ejecución: </h3>");
-                printw.println("</td>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">"+this.fechaFormato()+"</h3>");
-                printw.println("</td>");
+                printw.println("<td><a>Fecha Ejecución:</a></td>");
+//                printw.println("<h5 class=\"titulo\">Fecha de Ejecución: </h3>");
+//                printw.println("</td>");
+                printw.println("<td><a>"+this.fechaFormato()+"</a></td>");
+                //printw.println("<h5 class=\"titulo\">"+this.fechaFormato()+"</h5>");
+                //printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">Módulo: </h3>");
-                printw.println("</td>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">"+modulo+version+"</h3>");
-                printw.println("</td>");
+                printw.println("<td><a>Módulo:</a></td>");
+//                printw.println("<h5 class=\"titulo\">Módulo: </h5>");
+//                printw.println("</td>");
+                printw.println("<td><a>"+modulo+version+"</a></td>");
+//                printw.println("<h5 class=\"titulo\">"+modulo+version+"</h5>");
+//                printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">Navegador: </h3>");
-                printw.println("</td>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">"+navegador+"</h3>");
-                printw.println("</td>");
+                printw.println("<td><a>Navegador:</a></td>");
+//                printw.println("<h5 class=\"titulo\">Navegador: </h5>");
+//                printw.println("</td>");
+                printw.println("<td><a>"+navegador+"</a></td>");
+//                printw.println("<h5 class=\"titulo\">"+navegador+"</h5>");
+//                printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">Caso de Prueba: </h3>");
-                printw.println("</td>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">"+CasoPrueba+"</h3>");
-                printw.println("</td>");
+                printw.println("<td><a>Caso de Prueba</a></td>");
+//                printw.println("<h5 class=\"titulo\">Caso de Prueba: </h5>");
+//                printw.println("</td>");
+                printw.println("<td><a>"+CasoPrueba+"</a></td>");
+//                printw.println("<h5 class=\"titulo\">"+CasoPrueba+"</h5>");
+//                printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
-                printw.println("<td>");
-                printw.println("<h3 class=\"titulo\">Resultado: </h3>");
-                printw.println("</td>");
+                printw.println("<td><a>Resultado:</a></td>");
+//                printw.println("<h5 class=\"titulo\">Resultado: </h5>");
+//                printw.println("</td>");
                 printw.println("<td>");
                 System.out.println(Resultado.substring(0, 7));
                 int detalle=0;
@@ -585,20 +589,20 @@ public class evidenceGrid {
                 printw.println("<table>");
                 printw.println("<tr>");
                 printw.println("<td>");
-                printw.println("<h2 class=\"titulo\">Detalle de la Ejecución: </h2>");
+                printw.println("<h4 class=\"titulo\">Detalle de la Ejecución: </h4>");
                 printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr>");
                 printw.println("<td>");
-                printw.println("<h4 class=\"titulo\">"+Resultado+"</h4>");
+                printw.println("<a>"+Resultado+"</a>");
                 printw.println("</td>");
                 printw.println("</tr>");
                 printw.println("<tr height=\"25\">");
                 printw.println("</tr>");
                 printw.println("</table>");
             }
-            printw.println("<h2 class=\"titulo\">Pasos de Ejecución: </h2>");
-            printw.println("<h4 class=\"titulo\">Presiona sobre el paso de ejecución para ver la evidencia.</h4>");
+            printw.println("<h3 class=\"titulo\">Pasos de Ejecución: </h3>");
+            printw.println("<h5 class=\"titulo\">Presiona sobre el paso de ejecución para ver la evidencia.</h4>");
             for(int cont=0; cont<contador; cont++){
                 if((cont+1)<contador){
                     try{
@@ -608,7 +612,7 @@ public class evidenceGrid {
                     }
                     printw.println("<div class=\"panel\">");
                     try{
-                        printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1150\" height=\"550\"></center></p>");
+                        printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"100%\" height=\"100%\"></center></p>");
                     }catch(Exception e){
                     }
                     printw.println("</div>");
@@ -622,7 +626,7 @@ public class evidenceGrid {
                         }
                         printw.println("<div class=\"panel\">");
                         try{
-                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1150\" height=\"550\"></center></p>");
+                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
                         }catch(Exception e){
                         }
                         printw.println("</div>");
@@ -635,7 +639,7 @@ public class evidenceGrid {
                         }
                         printw.println("<div class=\"panel\">");
                         try{
-                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1150\" height=\"550\"></center></p>");
+                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
                         }catch(Exception e){
                         }
                         printw.println("</div>");
@@ -649,7 +653,7 @@ public class evidenceGrid {
                             }
                             printw.println("<div class=\"panel\">");
                             try{
-                                printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1150\" height=\"550\"></center></p>");
+                                printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
                             }catch(Exception e){
                             }
                             printw.println("</div>");
@@ -719,9 +723,281 @@ public class evidenceGrid {
             printw.close();//cerramos el archivo
 
             System.out.println("Generado exitosamente");//si todo sale bien mostramos un mensaje de guardado exitoso
+            
+            this.archivoTexto(CasoPrueba, Resultado, rutaEvidencia, modulo, version, navegador, urlAbsoluta);
+            this.reporteGeneral(rutaEvidencia, navegador, modulo);
            }catch(IOException e){
                System.out.println("Error: "+e);
            }
     }
     
+    
+    public void archivoTexto(String CasoPrueba, String Resultado, String rutaEvidencia, String modulo, String version, String navegador, String EvidenciaAbsoluta){
+
+        FileWriter filewriter = null;
+        PrintWriter printw = null;
+        try{
+            filewriter = new FileWriter(rutaEvidencia+"//"+fechaFormato()+"//ejecucion"+navegador+fechaFormato()+".txt",true);
+            printw = new PrintWriter(filewriter);//declarar un impresor            
+            printw.println(CasoPrueba);
+            if("Fallido".equals(Resultado.substring(0, 7))){
+                printw.println(Resultado.substring(0, 7));
+            }
+            if("Exitoso".equals(Resultado.substring(0, 7))){
+                printw.println(Resultado.substring(0, 7));
+            }
+            if(Resultado.length()>10){
+                if("Ejecución Fallida".equals(Resultado.substring(0, 17))){
+                   printw.println(Resultado.substring(0, 17)); 
+                }
+            } 
+            printw.println(EvidenciaAbsoluta);
+            printw.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        } 
+    }
+    
+    public void reporteGeneral(String rutaEvidencia, String navegador, String modulo){
+        
+        FileWriter filewriter = null;
+        PrintWriter printw = null;
+        try{
+            filewriter = new FileWriter(rutaEvidencia+"//"+fechaFormato()+"//ReporteGeneral"+fechaFormato()+".html");
+            printw = new PrintWriter(filewriter);
+            printw.println("<!DOCTYPE html>");
+            printw.println("<html>");// lang=\"es-ES\">");
+            printw.println("<head>");
+            //printw.println("<meta charset=\"utf-8\">");
+            printw.println("<title>FrameWork Testing iT</title>");
+            printw.println("<style>");
+            printw.println("* {margin:0; padding:0;}");
+            printw.println("a:link, a:visited, a:hover, a:active {color:#0f0;font-size:16px;}");
+            printw.println("body {background:#eee;font-family:verdana;}");
+            printw.println("h1 {color:#fff;font-size:24px;}");
+            printw.println("p {font-size:10px;}");
+            printw.println("ul {list-style-type:none;}");
+            printw.println("#cabecera {color:#fff;background-color:#000;padding:10px;}");
+            printw.println("#cabeceraMenu {color:#999;background-color:#000;padding:20px;text-align:center;float:center;}");
+            printw.println("#contenedor {margin:0 auto;width:100%;}");
+            printw.println("#contenido {background-color:#fff;width:100%;height:450px;}");
+            printw.println(".divDetalle {background-color:#fff;float:center;width:100%;border:none;height:450px;}");
+            printw.println(".frameDetalle {background-color:#fff;float:center;width:100%;border:none;height:100%;}");
+            printw.println("#menu {background-color:#999;float:left;height:450px;width:20%;}");
+            printw.println("#pie {background-color:#bbb;clear:both;color:#fff;padding:10px;text-align:center;}");
+            
+            printw.println(".btn {");
+            printw.println("border: none; /* Remove borders */");
+            printw.println("color: white; /* Add a text color */");
+            printw.println("padding: 8px 16px; /* Add some padding */");
+            printw.println("cursor: pointer; /* Add a pointer cursor on mouse-over */");
+            printw.println("border-radius: 35px;");
+            printw.println("}");
+
+            printw.println(".navegadores {background-color: #999;} /* Gris */");
+            printw.println(".navegadores:hover {background-color: #ddd;}");
+            printw.println(".navegadores:focus {outline: none;}");
+            
+            printw.println(".succes {background-color: #4CAF50;} /* Green */");
+            printw.println(".succes:hover {background-color: #46a049;}");
+
+            printw.println(".info {background-color: #2196F3;} /* Blue */");
+            printw.println(".info:hover {background: #0b7dda;}");
+
+            printw.println(".warning {background-color: #ff9800;width: 100%;} /* Orange */");
+            printw.println(".warning:hover {background: #e68a00;}");
+            printw.println(".warning:focus {outline: none;}");
+
+            printw.println(".danger {background-color: #f44336;width: 100%;} /* Red */");
+            printw.println(".danger:hover {background: #da190b;}");
+            printw.println("</style>");
+            printw.println("</head>");
+            printw.println("<body>");
+            printw.println("<div id=\"contenedor\">");
+            
+            
+            printw.println("<div id=\"cabecera\">");
+            printw.println("<center><h1>Reporte General de Ejecuciones</h1></center>");
+            printw.println("</div>");
+            
+            printw.println("<div id=\"cabeceraMenu\">");
+            
+            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\home.png\" width=\"25\" height=\"25\"/></button>");
+            printw.println("<button class=\"btn navegadores\" onClick=\"chrome()\"><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"25\" height=\"25\"/></button>");
+            printw.println("<button class=\"btn navegadores\" onClick=\"firefox()\"><img src=\"C:\\ambiente\\imagenes\\firefox.png\" width=\"25\" height=\"25\"/></button>");
+            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\edge.png\" width=\"25\" height=\"25\"/></button>");
+            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\safari.png\" width=\"25\" height=\"25\"/></button>");
+            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\ie.png\" width=\"25\" height=\"25\"/></button>");
+            
+            printw.println("</div>");
+            
+            printw.println("<div id=\"contenido\">");
+            printw.println("<div id=\"contenidoChrome\" class=\"divDetalle\" style=\"display: none;\" >");
+            printw.println("<iframe id=\"frameDetalle"+navegador+"\" class=\"frameDetalle\" src=\"chrome.html\"></iframe>");
+            printw.println("</div>");
+            printw.println("<div id=\"contenidoFirefox\" class=\"divDetalle\" style=\"display: none;\">");
+            printw.println("<iframe id=\"frameDetalle"+navegador+"\" class=\"frameDetalle\" src=\"firefox.html\"></iframe>");
+            printw.println("</div>");
+            printw.println("</div>");
+            printw.println("</div>");
+            printw.println("<footer>");
+            printw.println("<div id=\"pie\">");
+            printw.println("<p>Testing IT Consulting S.A. de C.V. © | Todos los Derechos Reservados</p>");
+            printw.println("</div>");
+            printw.println("</footer>");
+            
+            
+            printw.println("<script>");
+            printw.println("function firefox() {");
+            printw.println("document.getElementById('contenidoChrome').style.display='none';");
+            printw.println("document.getElementById('contenidoFirefox').style.display='block';");
+            printw.println("}");
+            printw.println("function chrome() {");
+            printw.println("document.getElementById('contenidoFirefox').style.display='none';");
+            printw.println("document.getElementById('contenidoChrome').style.display='block';");
+            printw.println("}");
+            printw.println("</script>");
+            
+            printw.println("</body>");
+            printw.println("</html>");
+            printw.close();
+            this.reportePagesNavegador(rutaEvidencia, navegador, modulo);
+            this.reportePagesNavegador(rutaEvidencia, navegador, modulo);
+        }catch(IOException e){
+        }
+    }
+    
+    public void reportePagesNavegador(String rutaEvidencia, String navegador, String modulo){
+        
+        FileWriter filewriter = null;
+        PrintWriter printw = null;
+        try{
+            filewriter = new FileWriter(rutaEvidencia+"//"+fechaFormato()+"//"+navegador+".html");
+            printw = new PrintWriter(filewriter);
+            printw.println("<!DOCTYPE html>");
+//            
+            printw.println("<html>");
+            printw.println("<head><title></title>");
+            
+            printw.println("<style>");
+            
+            printw.println("body {overflow-x:hidden;}");
+            printw.println(".btn {");
+            printw.println("border: none; /* Remove borders */");
+            
+            printw.println("color: white; /* Add a text color */");
+            printw.println("cursor: pointer; /* Add a pointer cursor on mouse-over */");
+            printw.println("}");
+            
+            printw.println(".imahtml {background-color:transparent;width:37px;height:37px;float:center;} /* transparente */");
+            printw.println(".imahtml:hover {background:#fff;}");
+            
+            printw.println(".info {background-color: #2196F3;padding: 15px 10px;} /* Blue */");
+            printw.println(".info:hover {background: #0b7dda;}");
+            
+            printw.println(".warning {background-color: #999;padding: 8px 16px;} /* Orange */");
+            printw.println(".warning:hover {background: #ddd;}");
+            
+            printw.println("#cabeceraMenu {color:#999;background-color:#fff;padding:20px;text-align:center;float:center;width:98%;}");
+            printw.println("#contenedor {margin:0 auto;width:100%;font-size:12px;font-family: Georgia, 'Times New Roman', serif;}");
+            printw.println("#contenido {background-color:#fff;float:center;height:400px;width:60%;overflow:hidden;}");
+            printw.println("#frameDetalle {background-color:#fff;float:center;height:100%;width:95%;border:none;overflow:hidden;}");
+            printw.println("#menu {background-color:#fff;color:#999;float:left;height:400px;width:40%;}");
+            
+//            printw.println(".table-fixed {width: 97%;display: block;}");
+            printw.println("tbody {height: 300px;overflow-y:auto;display: block;}");
+////            printw.println(".table-fixed thead,.table-fixed tbody,.table-fixed tfoot,.table-fixed tr,.table-fixed td,.table-fixed th {display: block;}");
+//            printw.println(".table-fixed tbody td,.table-fixed tfoot > tr> td{float: left;border-bottom-width: 0px;width:28%;height:100%;}");
+//            printw.println(".table-fixed thead > tr> th,{float: center;border-bottom-width: 0px;}");
+            //printw.println("td {width:150px;}");
+            
+            printw.println("</style>");
+                    
+            printw.println("</head>");    
+            printw.println("<body>");
+            
+            printw.println("<div id=\"contenedor\">");
+            printw.println("<div id=\"menu\">");
+            Scanner input = new Scanner(new File("C:\\evidencia\\"+this.fechaFormato()+"\\ejecucion"+navegador+this.fechaFormato()+".txt"));
+            if("firefox".equals(navegador)){
+                printw.println("<center><img src=\"C:\\ambiente\\imagenes\\firefox.png\" width=\"30\" height=\"30\"/></center>");
+            }
+            if("chrome".equals(navegador)){
+                printw.println("<center><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"30\" height=\"30\"/></center>");
+            }
+            printw.println("<center><h3>Lista de Ejecuciones "+navegador+"</h3>");
+            printw.println("<form>Busqueda: <input id=\"txtBusqueda\" type=\"text\" onkeyup=\"Buscar();\" /></form></center>");
+            printw.println("<table id=\"tblEjecuciones\">"); //class=\"table table-fixed\">");
+            printw.println("<tbody>"); //height=\"300\" overflow-y=\"auto\">");//<thead><tr><th>Casos de Prueba</th><th>Estatus</th><th>HTML</th><th>PDF</th></tr></thead><tbody>");
+            int a = 1;
+            while (input.hasNextLine()) {
+                String linea = input.nextLine();
+                if(a==1){
+                    printw.println("<tr>");
+                    printw.println("<td width=\"320\">"+linea+"</td>");
+                }
+                if(a==2){
+                    if("Exitoso".equals(linea)){
+                        printw.println("<td width=\"100\">Exitoso</td>");//<img src=\"C:\\ambiente\\imagenes\\paloma.png\" width=\"20\" height=\"25\"/></td>");
+                    }
+                    if("Fallido".equals(linea.substring(0, 7))){
+                        printw.println("<td width=\"100\">Fallido</td>");//<img src=\"C:\\ambiente\\imagenes\\tacha.png\" width=\"20\" height=\"25\"/></td>");
+                    }
+                    if(linea.length()>10){
+                        if("Ejecución Fallida".equals(linea.substring(0, 17))){
+                            printw.println("<td width=\"100\">Ejecución Fallida</td>");//<img src=\"C:\\ambiente\\imagenes\\warning.png\" width=\"15\" height=\"15\"/></td>");
+                        }
+                    }    
+                }
+                if(a==3){                                    
+                    printw.println("<td width=\"35\"><button class=\"btn imahtml\" onClick=\"Frame('"+linea+".html')\"><img src=\"C:\\ambiente\\imagenes\\html.png\" width=\"25\" height=\"30\"/></button></td>");                                  
+                    printw.println("<td width=\"35\"><button class=\"btn imahtml\" onClick=\"Frame('"+linea+".pdf')\"><img src=\"C:\\ambiente\\imagenes\\pdf.png\" width=\"25\" height=\"30\"/></button></td>");
+                    printw.println("</tr>");
+                    a=1;
+                }else{
+                    a++;
+                }              
+            }
+            printw.println("</tbody></table>"); 
+            input.close();
+            printw.println("</div>");
+            printw.println("<div id=\"contenido\">");
+            //printw.println("<center><h2 class=\"titulo\">Resultados en "+navegador+"</h2><center>");
+            printw.println("<iframe id=\"frameDetalle\"></iframe>");
+            printw.println("</div>");
+            printw.println("</div>");
+                     
+            printw.println("<script>");
+            
+            printw.println("function Frame(ruta){");
+            printw.println("var iframe = document.getElementById('frameDetalle');");
+            printw.println("iframe.src = ruta;");
+//            printw.println("var menu = document.getElementById('menu');");
+//            printw.println("var contenido = document.getElementById('contenido');");
+//            printw.println("contenido.style.height = menu.clientHeight;");
+            printw.println("}");
+            
+            printw.println("function Buscar() {");
+            printw.println("var tabla = document.getElementById('tblEjecuciones');");
+            printw.println("var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();");
+            printw.println("var cellsOfRow=\"\";var found=false;var compareWith=\"\";");
+            printw.println("for (var i = 1; i < tabla.rows.length; i++) {");
+            printw.println("cellsOfRow = tabla.rows[i].getElementsByTagName('td');");
+            printw.println("found = false;");
+            printw.println("for (var j = 0; j < cellsOfRow.length && !found; j++) { compareWith = cellsOfRow[j].innerHTML.toLowerCase(); if (busqueda.length == 0 || (compareWith.indexOf(busqueda) > -1))");
+            printw.println("{found = true;}}");
+            printw.println("if(found){tabla.rows[i].style.display = '';} else {");
+            printw.println("tabla.rows[i].style.display = 'none';");
+            printw.println("}}}");
+            printw.println("// ]]></script>");
+            
+            
+            printw.println("</script>");
+            
+            printw.println("</body>");
+            printw.println("</html>");
+            printw.close();
+        }catch(IOException e){
+        }
+    }
 }
