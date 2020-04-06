@@ -86,7 +86,7 @@ public class evidenceGrid {
     
     public String horaMinSeg(){
         Date fecha = new Date();
-        String hora = ""+fecha.getHours()+"-"+fecha.getMinutes()+"-"+fecha.getSeconds();
+        String hora = ""+fecha.getHours()+":"+fecha.getMinutes()+"."+fecha.getSeconds();
         return hora;
     }
     
@@ -753,6 +753,7 @@ public class evidenceGrid {
                    printw.println(Resultado.substring(0, 17)); 
                 }
             } 
+            printw.println(this.horaMinSeg());
             printw.println(EvidenciaAbsoluta);
             printw.close();
         }catch(IOException e){
@@ -939,7 +940,7 @@ public class evidenceGrid {
             if("chrome".equals(navegador)){
                 printw.println("<center><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"30\" height=\"30\"/></center>");
             }
-            printw.println("<center><h3>Lista de Ejecuciones "+navegador+"</h3>");
+            printw.println("<center><h3>Lista de ejecuciones "+navegador+"</h3>");
             printw.println("<form>Busqueda: <input id=\"txtBusqueda\" type=\"text\" onkeyup=\"Buscar();\" /></form></center>");
             printw.println("<table id=\"tblEjecuciones\">"); //class=\"table table-fixed\">");
             printw.println("<tbody>"); //height=\"300\" overflow-y=\"auto\">");//<thead><tr><th>Casos de Prueba</th><th>Estatus</th><th>HTML</th><th>PDF</th></tr></thead><tbody>");
@@ -948,22 +949,25 @@ public class evidenceGrid {
                 String linea = input.nextLine();
                 if(a==1){
                     printw.println("<tr>");
-                    printw.println("<td width=\"320\">"+linea+"</td>");
+                    printw.println("<td width=\"300\">"+linea+"</td>");
                 }
                 if(a==2){
                     if("Exitoso".equals(linea)){
-                        printw.println("<td width=\"100\">Exitoso</td>");//<img src=\"C:\\ambiente\\imagenes\\paloma.png\" width=\"20\" height=\"25\"/></td>");
+                        printw.println("<td width=\"80\">Exitoso</td>");//<img src=\"C:\\ambiente\\imagenes\\paloma.png\" width=\"20\" height=\"25\"/></td>");
                     }
                     if("Fallido".equals(linea.substring(0, 7))){
-                        printw.println("<td width=\"100\">Fallido</td>");//<img src=\"C:\\ambiente\\imagenes\\tacha.png\" width=\"20\" height=\"25\"/></td>");
+                        printw.println("<td width=\"80\">Fallido</td>");//<img src=\"C:\\ambiente\\imagenes\\tacha.png\" width=\"20\" height=\"25\"/></td>");
                     }
                     if(linea.length()>10){
                         if("Ejecución Fallida".equals(linea.substring(0, 17))){
-                            printw.println("<td width=\"100\">Ejecución Fallida</td>");//<img src=\"C:\\ambiente\\imagenes\\warning.png\" width=\"15\" height=\"15\"/></td>");
+                            printw.println("<td width=\"80\">Ejecución Fallida</td>");//<img src=\"C:\\ambiente\\imagenes\\warning.png\" width=\"15\" height=\"15\"/></td>");
                         }
                     }    
                 }
                 if(a==3){                                    
+                    printw.println("<td width=\"40\">"+linea+"</td>");
+                }
+                if(a==4){                                    
                     printw.println("<td width=\"35\"><button class=\"btn imahtml\" onClick=\"Frame('"+linea+".html')\"><img src=\"C:\\ambiente\\imagenes\\html.png\" width=\"25\" height=\"30\"/></button></td>");                                  
                     printw.println("<td width=\"35\"><button class=\"btn imahtml\" onClick=\"Frame('"+linea+".pdf')\"><img src=\"C:\\ambiente\\imagenes\\pdf.png\" width=\"25\" height=\"30\"/></button></td>");
                     printw.println("</tr>");
