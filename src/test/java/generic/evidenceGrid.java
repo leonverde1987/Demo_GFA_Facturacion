@@ -628,7 +628,7 @@ public class evidenceGrid {
                         }
                         printw.println("<div class=\"panel\">");
                         try{
-                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
+                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"100%\" height=\"100%\"></center></p>");
                         }catch(Exception e){
                         }
                         printw.println("</div>");
@@ -641,7 +641,7 @@ public class evidenceGrid {
                         }
                         printw.println("<div class=\"panel\">");
                         try{
-                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
+                            printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"100%\" height=\"100%\"></center></p>");
                         }catch(Exception e){
                         }
                         printw.println("</div>");
@@ -655,7 +655,7 @@ public class evidenceGrid {
                             }
                             printw.println("<div class=\"panel\">");
                             try{
-                                printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"1000\" height=\"550\"></center></p>");
+                                printw.println("<p><center><img src=\""+rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\evidencia"+(cont+1)+".png\" width=\"100%\" height=\"100%\"></center></p>");
                             }catch(Exception e){
                             }
                             printw.println("</div>");
@@ -824,7 +824,9 @@ public class evidenceGrid {
             
             printw.println("<div id=\"cabeceraMenu\">");
             
-            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\home.png\" width=\"25\" height=\"25\"/></button>");
+            if("si".equals(reporte.getProperty("home"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\home.png\" width=\"25\" height=\"25\"/></button>");
+            }
             if("si".equals(reporte.getProperty("chrome"))){
                 printw.println("<button class=\"btn navegadores\" onClick=\"chrome()\"><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"25\" height=\"25\"/></button>");
             }
@@ -993,7 +995,7 @@ public class evidenceGrid {
             printw.println("var tabla = document.getElementById('tblEjecuciones');");
             printw.println("var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();");
             printw.println("var cellsOfRow=\"\";var found=false;var compareWith=\"\";");
-            printw.println("for (var i = 1; i < tabla.rows.length; i++) {");
+            printw.println("for (var i = 0; i < tabla.rows.length; i++) {");
             printw.println("cellsOfRow = tabla.rows[i].getElementsByTagName('td');");
             printw.println("found = false;");
             printw.println("for (var j = 0; j < cellsOfRow.length && !found; j++) { compareWith = cellsOfRow[j].innerHTML.toLowerCase(); if (busqueda.length == 0 || (compareWith.indexOf(busqueda) > -1))");
