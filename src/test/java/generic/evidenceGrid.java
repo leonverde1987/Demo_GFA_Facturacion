@@ -22,6 +22,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -350,6 +351,7 @@ public class evidenceGrid {
     public void crearHTML(String CasoPrueba, String Resultado, int contador, List<String> Pasos, String rutaEvidencia, String modulo, String version, String navegador) throws IOException{
         FileWriter filewriter = null;
         PrintWriter printw = null;
+        
         String urlAbsoluta = rutaEvidencia+"//"+this.fechaFormato()+"//"+navegador+"//"+CasoPrueba.substring(0, 3)+"//"+this.totalArchivos(new File(rutaEvidencia+"//"+fechaFormato()+"//"+navegador+"//"+CasoPrueba.substring(0, 3)))+"//"+CasoPrueba+"//"+CasoPrueba;
         try{
             filewriter = new FileWriter(rutaEvidencia+"\\"+this.fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)+"\\"+this.totalArchivos(new File(rutaEvidencia+"\\"+fechaFormato()+"\\"+navegador+"\\"+CasoPrueba.substring(0, 3)))+"\\"+CasoPrueba+"\\"+CasoPrueba+".html");//declarar el archivo
@@ -758,8 +760,8 @@ public class evidenceGrid {
         } 
     }
     
-    public void reporteGeneral(String rutaEvidencia, String navegador, String modulo){
-        
+    public void reporteGeneral(String rutaEvidencia, String navegador, String modulo) throws FileNotFoundException{
+        Properties reporte = new generic.genericGrid().getPropetiesFile("C://ambiente//reporte//reporte.properties");
         FileWriter filewriter = null;
         PrintWriter printw = null;
         try{
@@ -817,17 +819,27 @@ public class evidenceGrid {
             
             
             printw.println("<div id=\"cabecera\">");
-            printw.println("<center><h1>Reporte General de Ejecuciones</h1></center>");
+            printw.println("<center><h1>"+reporte.getProperty("titulo")+"</h1></center>");
             printw.println("</div>");
             
             printw.println("<div id=\"cabeceraMenu\">");
             
             printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\home.png\" width=\"25\" height=\"25\"/></button>");
-            printw.println("<button class=\"btn navegadores\" onClick=\"chrome()\"><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"25\" height=\"25\"/></button>");
-            printw.println("<button class=\"btn navegadores\" onClick=\"firefox()\"><img src=\"C:\\ambiente\\imagenes\\firefox.png\" width=\"25\" height=\"25\"/></button>");
-            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\edge.png\" width=\"25\" height=\"25\"/></button>");
-            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\safari.png\" width=\"25\" height=\"25\"/></button>");
-            printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\ie.png\" width=\"25\" height=\"25\"/></button>");
+            if("si".equals(reporte.getProperty("chrome"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"chrome()\"><img src=\"C:\\ambiente\\imagenes\\chrome.png\" width=\"25\" height=\"25\"/></button>");
+            }
+            if("si".equals(reporte.getProperty("firefox"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"firefox()\"><img src=\"C:\\ambiente\\imagenes\\firefox.png\" width=\"25\" height=\"25\"/></button>");
+            }
+            if("si".equals(reporte.getProperty("edge"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\edge.png\" width=\"25\" height=\"25\"/></button>");
+            }
+            if("si".equals(reporte.getProperty("ie"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\safari.png\" width=\"25\" height=\"25\"/></button>");
+            }
+            if("si".equals(reporte.getProperty("safari"))){
+                printw.println("<button class=\"btn navegadores\" onClick=\"\"><img src=\"C:\\ambiente\\imagenes\\ie.png\" width=\"25\" height=\"25\"/></button>");
+            }
             
             printw.println("</div>");
             
@@ -842,7 +854,7 @@ public class evidenceGrid {
             printw.println("</div>");
             printw.println("<footer>");
             printw.println("<div id=\"pie\">");
-            printw.println("<p>Testing IT Consulting S.A. de C.V. © | Todos los Derechos Reservados</p>");
+            printw.println("<p>"+reporte.getProperty("footer")+"</p>");//Testing IT Consulting S.A. de C.V. © | Todos los Derechos Reservados</p>");
             printw.println("</div>");
             printw.println("</footer>");
             
