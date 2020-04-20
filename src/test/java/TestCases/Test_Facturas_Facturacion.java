@@ -56,7 +56,6 @@ public class Test_Facturas_Facturacion extends steps_Facturas_Facturacion{
     public void Test_Facturar_Token_No_Valido() throws InterruptedException, DocumentException, BadElementException, IOException, Exception {
         try{
             Escenario = "FAC_Facturar_Facturar_Boletos.";
-            Navegador = this.navegador(driver.toString());
             
             //Paso 1
             Pasos.add(contador+".- Abrir navegador en la URL: "+Config.getProperty("urlAppFacturas"));

@@ -4,6 +4,8 @@ package generic;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +27,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver; 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,7 +48,8 @@ public class genericGrid extends evidenceGrid {
     public Properties getPropetiesFile(String Archivo) throws FileNotFoundException{
         Properties prop = new Properties();
         try{
-            prop.load(new FileInputStream(Archivo));
+            Reader reader = new InputStreamReader((new FileInputStream(Archivo)), "UTF-8"); 
+            prop.load(reader);
         }catch(IOException e){
             System.out.println("Mensaje Properties: "+ e);
         }
@@ -89,6 +93,16 @@ public class genericGrid extends evidenceGrid {
                 //capabilities = DesiredCapabilities.firefox();
                 url = new URL("http://localhost:5556/wd/hub");
                 driver = new RemoteWebDriver(url, firefoxOptions);
+            }
+            if("motorolaOneVision".equals(navegador)){
+                DesiredCapabilities capabilitie =new DesiredCapabilities();
+                capabilitie.setCapability("deviceName", navegador);
+                capabilitie.setCapability("platformVerion", "9");
+                capabilitie.setCapability("platformName", "Android");
+                capabilitie.setCapability("device", "ZY326LRQHS");
+                capabilitie.setCapability("browserName", "Chrome");
+                url = new URL("http://localhost:4723/wd/hub");
+                driver = new RemoteWebDriver(url, capabilitie);
             }
             
         }catch(Exception e){
@@ -155,15 +169,14 @@ public class genericGrid extends evidenceGrid {
                 }
             }
             //Generamos PDF
-            this.crearPDF(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
+            //this.crearPDF(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
             //Generamos PDF
-            this.crearXML(Escenario, Resultado, contador, Pasos, RutaEvidencia, navegador);
+            //this.crearXML(Escenario, Resultado, contador, Pasos, RutaEvidencia, navegador);
             //Generamos HTML
             this.crearHTML(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
 
-            
         }catch(Exception e){
-            System.out.println("Mensaje Evidencia: "+e);
+            System.out.println("MEnsaje Evidencia: "+e);
         }
     }
     /*
@@ -178,9 +191,10 @@ public class genericGrid extends evidenceGrid {
      * @param msjActual Es el valr del texto que se compara.
      * @param Elemento Es el elemento del que se va a comparr el texto.
      */
-    public String AssertMsjElemento(RemoteWebDriver driver, String msjActual, String Elemento){
+    public String AssertMsjElemento(RemoteWebDriver driver, String msjActual, String Elemento) throws InterruptedException{
         String msj = "";
         try{
+            this.dormir3seg();
             Assert.assertEquals(this.obtenerTexto(driver, "xpath", Elemento), msjActual);
             msj = "Exitoso";
         }catch(AssertionError e){
@@ -244,10 +258,9 @@ public class genericGrid extends evidenceGrid {
                 driver.findElement(By.name(Elemento)).click();
                 break;
             case "xpath":
-                driver.findElement(By.xpath(Elemento)).click();
-                break;
-            case "class":
-                driver.findElement(By.className(Elemento)).click();
+                WebDriverWait wait = new WebDriverWait(driver, 10);
+                WebElement el = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Elemento))));
+                el.click();
                 break;
         }
 
@@ -300,9 +313,13 @@ public class genericGrid extends evidenceGrid {
 //                    WebElement element = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id(Elemento)));
 //                    element.click();
                     //this.dormir10seg();
-                    WebElement el = driver.findElement(By.xpath(Elemento));
+                    //driver.findElement(By.xpath(Elemento)).sendKeys(Texto);
+                    WebDriverWait wait = new WebDriverWait(driver, 10);
+                    WebElement el = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Elemento))));
                     el.sendKeys(Texto);
-                    el.submit();
+                    this.dormir3seg();
+                    el.sendKeys(Keys.DOWN);
+                    el.sendKeys(Keys.ENTER);
                 }catch(Exception e){
                     System.out.println("Catch: "+e);
                 }
@@ -319,13 +336,19 @@ public class genericGrid extends evidenceGrid {
     }
 
     /***
+     * El método le da un tiempo de 3 segundos al webDriver.
+     * @exception InterruptedException Para manejar excepciones con el hilo de procesamiento que se esta deteniendo.
+     */
+    public void dormir3seg() throws InterruptedException{
+        Thread.sleep(3000);
+    }
+    /***
      * El método le da un tiempo de 10 segundos al webDriver.
      * @exception InterruptedException Para manejar excepciones con el hilo de procesamiento que se esta deteniendo.
      */
     public void dormir10seg() throws InterruptedException{
         Thread.sleep(10000);
     }
-    
     /***
      * El método le da un tiempo de 10 segundos al webDriver.
      * 
