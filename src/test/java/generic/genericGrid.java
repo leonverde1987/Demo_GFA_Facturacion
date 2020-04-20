@@ -169,7 +169,7 @@ public class genericGrid extends evidenceGrid {
                 }
             }
             //Generamos PDF
-            //this.crearPDF(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
+            this.crearPDF(Escenario, Resultado, contador, Pasos, RutaEvidencia, Modulo, Version, navegador);
             //Generamos PDF
             //this.crearXML(Escenario, Resultado, contador, Pasos, RutaEvidencia, navegador);
             //Generamos HTML
